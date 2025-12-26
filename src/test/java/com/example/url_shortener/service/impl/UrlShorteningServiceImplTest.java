@@ -1,9 +1,10 @@
 package com.example.url_shortener.service.impl;
 
+import com.example.url_shortener.dto.ShortUrlRequestDto;
+import com.example.url_shortener.dto.ShortUrlResponseDto;
 import com.example.url_shortener.entity.UrlMapping;
 import com.example.url_shortener.exception.UrlNotFoundException;
 import com.example.url_shortener.repository.UrlMappingRepository;
-import com.example.url_shortener.service.UrlShorteningService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +17,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UrlShorteningServiceImplTest {
@@ -50,4 +52,25 @@ class UrlShorteningServiceImplTest {
 
         assertEquals("Url doesnt exist with URI : "+"bcd",ex.getMessage());
     }
+
+    //Create short url
+
+    @Test
+    void createShortUrl_should_return_shortUrl(){
+        UrlMapping mapping1=new UrlMapping(1L,null,"www.google.com", Instant.now(),Instant.now().plus(7,ChronoUnit.DAYS));;
+
+        UrlMapping mapping2=new UrlMapping(1L,"abc","www.google.com", Instant.now(),Instant.now().plus(7,ChronoUnit.DAYS));
+        ShortUrlRequestDto requestDto=new ShortUrlRequestDto();
+        requestDto.setLongUrl("www.google.com");
+        requestDto.setExpiredAt(Instant.now().plus(7,ChronoUnit.DAYS));
+        when(repository.save(any(UrlMapping.class))).thenReturn(mapping1)
+                .thenReturn(mapping2);
+
+        ShortUrlResponseDto result=shorteningService.createShortUrl(requestDto);
+
+        verify(repository, times(2)).save(any(UrlMapping.class));
+
+        assertEquals(new ShortUrlResponseDto("null/abc"),result);
+    }
+
 }
