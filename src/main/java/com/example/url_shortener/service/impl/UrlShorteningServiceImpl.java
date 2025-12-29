@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 @Service
@@ -34,7 +35,9 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
         UrlMapping urlMapping=new UrlMapping();
         urlMapping.setLongUrl(requestDto.getLongUrl());
         if(requestDto.getExpiredAt()!=null){
-            urlMapping.setExpiredAt(requestDto.getExpiredAt());
+            urlMapping.setExpiredAt(requestDto.getExpiredAt()
+                    .atZone(ZoneId.systemDefault())
+                    .toInstant());
         }else{
             urlMapping.setExpiredAt(Instant.now().plus(7, ChronoUnit.DAYS));
         }

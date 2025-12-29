@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+    <h1>URL Shortener</h1>
+
+    <form id="shortenForm">
+        <input type="url" id="longUrl" placeholder="Enter long URL..." required />
+
+        <input type="datetime-local" id="expiresAt" />
+
+        <button type="submit">Shorten URL</button>
+    </form>
+
+    <p id="error" class="error"></p>
+    <p id="result" class="result"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

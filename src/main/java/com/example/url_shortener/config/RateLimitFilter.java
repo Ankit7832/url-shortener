@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-@Order(1)
 public class RateLimitFilter extends OncePerRequestFilter {
 
     private final Map<String, Bucket> bucketMap = new ConcurrentHashMap<>();
@@ -32,11 +31,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain
-    ) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String clientIp = request.getRemoteAddr();  // FIXED
         Bucket bucket = resolveBucket(clientIp);
@@ -46,8 +41,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
-            response.setHeader("Retry-After", "60");
-            response.getWriter().write("Too many requests from IP: " + clientIp);
+            response.getWriter().write("Too many requests, Retry after some time");
         }
     }
 }

@@ -25,7 +25,7 @@ public class ShortUrlController {
         return ResponseEntity.status(HttpStatus.CREATED).body(urlResponseDto);
     }
 
-    @GetMapping("/{shortCode}")
+    @GetMapping("/{shortCode:[a-zA-Z0-9]+}")
     public ResponseEntity<Void> redirectUrl(@PathVariable String shortCode){
 
         String redirectUrl= urlShorteningService.redirectUrl(shortCode);
