@@ -47,8 +47,10 @@ form.addEventListener('submit', async (event) => {
     }
 
     resultBox.innerHTML = `
-      <strong>Short URL</strong>
-      <a href="${body.shortUrl}" target="_blank">${body.shortUrl}</a>
+      <a href="${body.shortUrl}" target="_blank" rel="noopener noreferrer">
+  ${body.shortUrl}
+</a>
+
       <button id="copyBtn">Copy</button>
     `;
     resultBox.classList.remove('hidden');
