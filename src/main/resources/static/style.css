@@ -1,75 +1,96 @@
 body {
-    margin: 0;
-    background: #ececec;
-    font-family: Arial, sans-serif;
-    color: #111;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  background: #ececec;
+  font-family: system-ui, -apple-system, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-    background: #fafafa;
-    padding: 26px 22px;
-    width: 360px;
-    border-radius: 10px;
-    border: 1px solid #d7d7d7;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  background: #fafafa;
+  padding: 28px;
+  width: 360px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 18px;
-    font-size: 1.4rem;
-    color: #222;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 0.85rem;
+  margin-top: 12px;
+  display: block;
 }
 
 input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 12px;
-    border: 1px solid #b5b5b5;
-    border-radius: 6px;
-    background: #fafafa;
-    font-size: 0.95rem;
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 0.95rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #202020;
 }
 
 button {
-    width: 100%;
-    margin-top: 18px;
-    padding: 11px;
-    background: #202020;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.2s;
+  width: 100%;
+  margin-top: 20px;
+  padding: 11px;
+  background: #202020;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-button:hover {
-    background: #363636;
+button:hover:not(:disabled) {
+  background: #363636;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .error {
-    color: #d60000;
-    margin-top: 10px;
-    text-align: center;
-    font-size: 0.9rem;
+  margin-top: 12px;
+  color: #d60000;
+  text-align: center;
 }
 
 .result {
-    margin-top: 12px;
-    text-align: center;
-    font-size: 0.95rem;
+  margin-top: 16px;
+  padding: 12px;
+  background: #e9f1ff;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
 }
 
 .result a {
-    color: #0056d6;
-    text-decoration: none;
-}
-
-.result a:hover {
-    text-decoration: underline;
+  display: block;
+  margin-top: 6px;
+  font-weight: 500;
+  color: #0056d6;
+  text-decoration: none;
 }

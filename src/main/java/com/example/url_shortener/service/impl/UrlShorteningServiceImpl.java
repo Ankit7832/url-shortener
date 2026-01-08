@@ -14,8 +14,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.ZoneId;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Service
@@ -35,11 +34,9 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
         UrlMapping urlMapping=new UrlMapping();
         urlMapping.setLongUrl(requestDto.getLongUrl());
         if(requestDto.getExpiredAt()!=null){
-            urlMapping.setExpiredAt(requestDto.getExpiredAt()
-                    .atZone(ZoneId.systemDefault())
-                    .toInstant());
+            urlMapping.setExpiredAt(requestDto.getExpiredAt());
         }else{
-            urlMapping.setExpiredAt(Instant.now().plus(7, ChronoUnit.DAYS));
+            urlMapping.setExpiredAt(LocalDateTime.now().plus(7, ChronoUnit.DAYS));
         }
 
         UrlMapping savedUrl=urlMappingRepository.save(urlMapping);
@@ -62,8 +59,6 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
     public String redirectUrl(String shortUrl) {
         UrlMapping urlMapping=urlMappingRepository.findByShortUrl(shortUrl)
                 .orElseThrow(()-> new UrlNotFoundException("Url doesnt exist with URI : "+shortUrl));
-
-        log.info("Redirecting shortUrl={} to longUrl={}", shortUrl, urlMapping.getLongUrl());
 
         return urlMapping.getLongUrl();
     }

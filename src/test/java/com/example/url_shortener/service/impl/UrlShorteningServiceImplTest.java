@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ class UrlShorteningServiceImplTest {
 
     @BeforeEach
     void setup(){
-        urlMapping=new UrlMapping(1L,"abc","www.google.com", Instant.now(),Instant.now().plus(7,ChronoUnit.DAYS));
+        urlMapping=new UrlMapping(1L,"abc","www.google.com", LocalDateTime.now(),LocalDateTime.now().plus(7,ChronoUnit.DAYS));
     }
 
     @Test
@@ -57,12 +58,15 @@ class UrlShorteningServiceImplTest {
 
     @Test
     void createShortUrl_should_return_shortUrl(){
-        UrlMapping mapping1=new UrlMapping(1L,null,"www.google.com", Instant.now(),Instant.now().plus(7,ChronoUnit.DAYS));;
+        UrlMapping mapping1=new UrlMapping(1L,null,"www.google.com", LocalDateTime.now(),LocalDateTime.now().plus(7,ChronoUnit.DAYS));;
 
-        UrlMapping mapping2=new UrlMapping(1L,"abc","www.google.com", Instant.now(),Instant.now().plus(7,ChronoUnit.DAYS));
+        UrlMapping mapping2=new UrlMapping(1L,"abc","www.google.com", LocalDateTime.now(),LocalDateTime.now().plus(7,ChronoUnit.DAYS));
+
         ShortUrlRequestDto requestDto=new ShortUrlRequestDto();
         requestDto.setLongUrl("www.google.com");
-        requestDto.setExpiredAt(Instant.now().plus(7,ChronoUnit.DAYS));
+        requestDto.setExpiredAt(LocalDateTime.now().plus(7,ChronoUnit.DAYS));
+
+
         when(repository.save(any(UrlMapping.class))).thenReturn(mapping1)
                 .thenReturn(mapping2);
 

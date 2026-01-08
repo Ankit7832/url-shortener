@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>URL Shortener</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <title>URL Shortener</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="container">
-    <h1>URL Shortener</h1>
+  <div class="container">
+    <h1>🔗 URL Shortener</h1>
+    <p class="subtitle">Create short links with optional expiry</p>
 
     <form id="shortenForm">
-        <input type="url" id="longUrl" placeholder="Enter long URL..." required />
+      <label>Long URL</label>
+      <input type="url" id="longUrl" placeholder="https://example.com" required />
 
-        <input type="datetime-local" id="expiresAt" />
+      <label>Expiry (optional)</label>
+      <input type="datetime-local" id="expiresAt" />
 
-        <button type="submit">Shorten URL</button>
+      <button type="submit" id="submitBtn">Shorten URL</button>
     </form>
 
     <p id="error" class="error"></p>
-    <p id="result" class="result"></p>
-</div>
 
-<script src="script.js"></script>
+    <div id="result" class="result hidden"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

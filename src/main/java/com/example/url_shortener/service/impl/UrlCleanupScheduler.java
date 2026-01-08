@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class UrlCleanupScheduler {
     @Transactional
     public void cleanupExpiredUrls(){
 
-        List<UrlMapping> expiredUrls=mappingRepository.findByExpiredAtBefore(Instant.now());
+        List<UrlMapping> expiredUrls=mappingRepository.findByExpiredAtBefore(LocalDateTime.now());
 
         if(expiredUrls.isEmpty()){
             log.debug("No expired Url found");

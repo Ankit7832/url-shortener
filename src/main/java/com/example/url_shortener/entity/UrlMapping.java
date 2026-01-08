@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -27,13 +27,13 @@ public class UrlMapping {
     private String longUrl;
 
     @Column(name = "created_at")
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "expired_at")
-    private Instant expiredAt;
+    private LocalDateTime expiredAt;
 
     @PrePersist
     public void onCreate() {
-        this.createdAt = Instant.now();
+        this.createdAt = LocalDateTime.now();
     }
 }
