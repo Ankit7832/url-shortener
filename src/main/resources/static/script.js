@@ -1,5 +1,5 @@
 "use strict";
-const API_BASE = 'http://localhost:8080/shortUrl';
+const API_BASE = 'linkly.up.railway.app/shortUrl';
 const form = document.getElementById('shortenForm');
 const inputUrl = document.getElementById('longUrl');
 const inputExpiry = document.getElementById('expiresAt');
@@ -18,7 +18,6 @@ form.addEventListener('submit', async (event) => {
     }
     const payload = { longUrl };
     if (inputExpiry.value) {
-        // Firefox-safe LocalDateTime validation
         if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(inputExpiry.value)) {
             errorBox.textContent = 'Invalid expiry date format.';
             return;

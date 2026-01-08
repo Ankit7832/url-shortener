@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8080/shortUrl';
+const API_BASE = 'linkly.up.railway.app/shortUrl';
 
 const form = document.getElementById('shortenForm') as HTMLFormElement;
 const inputUrl = document.getElementById('longUrl') as HTMLInputElement;
