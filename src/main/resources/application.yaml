@@ -24,6 +24,6 @@ spring:
     redis:
       host: ${SPRING_REDIS_HOST}
       port: ${SPRING_REDIS_PORT}
-
+      password: ${SPRING_REDIS_PASSWORD}
 app:
   domain: ${APP_DOMAIN}
