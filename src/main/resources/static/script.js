@@ -1,5 +1,5 @@
 "use strict";
-const API_BASE = 'shortUrl';
+const API_BASE = 'https://linkly.up.railway.app/shortUrl';
 const form = document.getElementById('shortenForm');
 const inputUrl = document.getElementById('longUrl');
 const inputExpiry = document.getElementById('expiresAt');
